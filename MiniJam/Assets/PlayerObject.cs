@@ -13,11 +13,15 @@ public class PlayerObject : ScriptableObject
     public TypeofEvolution typE;
     public bool isdead;
 
+    
+
+
 }
 public enum TypeofEvolution
 {
     DefaultEvelution,
     Stage1Evolution,
     Stage2Evolution,
-    Stage3Evolution
+    Stage3Evolution,
+    FinalStageEvolution
 }

@@ -13,6 +13,8 @@ public class PlayerObject : ScriptableObject
     public TypeofEvolution typE;
     public bool isdead;
 
+    public int health;
+    public int damage;
     
 
 

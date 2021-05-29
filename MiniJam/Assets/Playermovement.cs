@@ -31,6 +31,9 @@ public class Playermovement : MonoBehaviour
     public GameObject shootout; // game object to be instantiated as bullets
   
     public float canfire = 1f;// to stop players from bombarding the game with too many key presses
+
+    public int health;
+    public int damage;
     void Awake()
     {
         
@@ -38,6 +41,7 @@ public class Playermovement : MonoBehaviour
         firerate = player.firerate;
         isfiring = player.isfiring;
         typE = player.typE;
+        
 
         isdead = false;
     }   // Start is called before the first frame update
@@ -49,35 +53,62 @@ public class Playermovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isdead)
-        {
+        
+        
             switch(typE)
             {
                 case TypeofEvolution.DefaultEvelution:
-                    // implement evolution default
-
+             
+                player.health = 100;
+                player.damage = 100;
+                health = player.health;
+                damage = player.damage;
+                // implement evolution default
+                if (isdead)
+                {
                     typE = TypeofEvolution.Stage1Evolution;
-                    break;
+                   
+                }
+                break;
 
-                case TypeofEvolution.Stage1Evolution:
+            case TypeofEvolution.Stage1Evolution:
 
-                    // implement evolution stage 2
+                player.health = 200;
+                player.damage = 200;
+                health = player.health;
+                damage = player.damage;
+                if (isdead)
+                {
                     typE = TypeofEvolution.Stage2Evolution;
-                    break;
+
+                }
+                break;
 
           
                 case TypeofEvolution.Stage3Evolution:
 
-                    // implement evolution stage 3
+                player.health = 300;
+                player.damage = 300;
+                health = player.health;
+                damage = player.damage;
+                if (isdead)
+                {
                     typE = TypeofEvolution.FinalStageEvolution;
-                    break;
+
+                }
+                break;
 
                 case TypeofEvolution.FinalStageEvolution:
-                    // implement evolution Final Stage
-                    break;
+
+                player.health = 400;
+                player.damage = 400;
+                health = player.health;
+                damage = player.damage;
+                // implement evolution Final Stage
+                break;
                     
             }
-        }
+       
 
     }
 
@@ -89,21 +120,42 @@ public class Playermovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
+
+
             playerobject.transform.Translate(Vector3.up * playermovement * Time.deltaTime);
+            if(playerobject.transform.position.y >0)
+            {
+                transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            }
+            
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             playerobject.transform.Translate(Vector3.down * playermovement * Time.deltaTime);
+
+           if(playerobject.transform.position.y < -360)
+            {
+                transform.position = new Vector3(transform.position.x, -360, transform.position.z);
+            }
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             playerobject.transform.Translate(Vector3.left * playermovement * Time.deltaTime);
+
+            if (playerobject.transform.position.x< -770)
+            {
+                transform.position = new Vector3(-770,transform.position.y , transform.position.z);
+            }
         }
         if (Input.GetKey(KeyCode.D))
         {
             playerobject.transform.Translate(Vector3.right * playermovement * Time.deltaTime);
+            if (playerobject.transform.position.x > 770)
+            {
+                transform.position = new Vector3(770, transform.position.y, transform.position.z);
+            }
         }
 
         //FIRE PROJECTILES
@@ -117,10 +169,7 @@ public class Playermovement : MonoBehaviour
     public void Shoot()
     {
         canfire = Time.time + firerate;
-       if(canfire>5)
-        {
-            canfire = 0.02f;
-        }
+       
        
             Instantiate(shootout, transform.position + new Vector3(0, 2.5f, 0), Quaternion.identity);
    

@@ -108,7 +108,12 @@ public class Playermovement : MonoBehaviour
                 break;
                     
             }
-       
+        //FIRE PROJECTILES
+
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > canfire)
+        {
+            Shoot();
+        }
 
     }
 
@@ -158,12 +163,7 @@ public class Playermovement : MonoBehaviour
             }
         }
 
-        //FIRE PROJECTILES
-
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > canfire)
-        {
-            Shoot();
-        }
+       
     }
 
     public void Shoot()

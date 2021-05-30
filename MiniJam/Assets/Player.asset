@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   playermovement: 250
-  firerate: 1
+  firerate: 0.02
   isfiring: 0
-  typE: 2
+  typE: 0
   isdead: 0
+  health: 100
+  damage: 100
